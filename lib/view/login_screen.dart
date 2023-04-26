@@ -20,7 +20,9 @@ class _LoginScreenState extends State<LoginScreen> {
           // Navigator.pushNamed(context, RoutesName.home);
           // Navigator.push(context,
           //     MaterialPageRoute(builder: (context) => const HomeScreen()));
-          Utils.flashBarErrorMessage(/*'Hello',*/'Button is clicked', context);
+          // Utils.toastMessage('Button is clicked');
+          // Utils.flashBarErrorMessage(/*'Hello',*/'Button is clicked', context);
+          Utils.snackBar('Button clicked', context);
         },
         child: const Text('Click me'),
       ),
