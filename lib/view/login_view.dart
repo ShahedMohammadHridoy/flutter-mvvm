@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm/res/components/round_button.dart';
+import 'package:mvvm/utils/routes/routes_name.dart';
 import 'package:mvvm/utils/utils.dart';
 import 'package:mvvm/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
@@ -102,10 +103,17 @@ class _LoginViewState extends State<LoginView> {
                     'password': _passwordController.text.toString(),
                   };
                   authViewMode.loginApi(data, context);
-                  print('Api hit');
                 }
               },
             ),
+            SizedBox(
+              height: height * .02,
+            ),
+            InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, RoutesName.register);
+                },
+                child: const Text("Don't have account? Sign Up")),
           ],
         )));
   }

@@ -1,7 +1,6 @@
-
-
 class RoutesName {
   //accounts routes name
+  static const String register = 'register_screen';
   static const String login = 'login_screen';
 
   //home screen routes name
