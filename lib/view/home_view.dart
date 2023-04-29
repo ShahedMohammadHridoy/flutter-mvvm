@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mvvm/data/response/status.dart';
 import 'package:mvvm/utils/routes/routes_name.dart';
+import 'package:mvvm/utils/utils.dart';
 import 'package:mvvm/view_model/home_view_model.dart';
 import 'package:mvvm/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
@@ -62,13 +63,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: ListTile(
                           leading: SizedBox(
                             width: 50,
-                            child: Image.network(value
-                                .moviesList.data!.movies![index].posterurl 
-                                .toString(), errorBuilder: (context, error, stackTrace){
-                              return Container(
-                                color: Colors.amber,
-                              );
-                            },),
+                            child: Image.network(
+                              value.moviesList.data!.movies![index].posterurl
+                                  .toString(),
+                              errorBuilder: (context, error, stackTrace) {
+                                return const Center(
+                                    child:
+                                        Icon(Icons.error, color: Colors.red));
+                              },
+                            ),
                           ),
                           title: Text(value
                               .moviesList.data!.movies![index].title
@@ -76,6 +79,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           subtitle: Text(value
                               .moviesList.data!.movies![index].year
                               .toString()),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(Utils.avgRating(value
+                                      .moviesList.data!.movies![index].ratings!)
+                                  .toString()),
+                              const Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     });

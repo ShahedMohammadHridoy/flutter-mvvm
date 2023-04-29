@@ -4,6 +4,11 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Utils {
+  static double avgRating(List<int> ratings) {
+    double average = ratings.reduce((a, b) => a + b) / ratings.length;
+    return double.parse(average.toStringAsFixed(1));
+  }
+
   static fieldFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
