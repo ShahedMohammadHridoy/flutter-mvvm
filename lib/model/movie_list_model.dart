@@ -28,32 +28,32 @@ class Movies {
   List<String>? genres;
   List<int>? ratings;
   String? poster;
-  String? contentRating;
+  dynamic? contentRating;
   String? duration;
   String? releaseDate;
-  int? averageRating;
+  dynamic? averageRating;
   String? originalTitle;
   String? storyline;
   List<String>? actors;
-  String? imdbRating;
+  dynamic? imdbRating;
   String? posterurl;
 
   Movies(
       {this.id,
-        this.title,
-        this.year,
-        this.genres,
-        this.ratings,
-        this.poster,
-        this.contentRating,
-        this.duration,
-        this.releaseDate,
-        this.averageRating,
-        this.originalTitle,
-        this.storyline,
-        this.actors,
-        this.imdbRating,
-        this.posterurl});
+      this.title,
+      this.year,
+      this.genres,
+      this.ratings,
+      this.poster,
+      this.contentRating,
+      this.duration,
+      this.releaseDate,
+      this.averageRating,
+      this.originalTitle,
+      this.storyline,
+      this.actors,
+      this.imdbRating,
+      this.posterurl});
 
   Movies.fromJson(Map<String, dynamic> json) {
     id = json['id'];

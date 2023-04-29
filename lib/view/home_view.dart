@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm/data/response/status.dart';
 import 'package:mvvm/utils/routes/routes_name.dart';
+import 'package:mvvm/view_model/home_view_model.dart';
 import 'package:mvvm/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +14,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  HomeViewModel homeViewModel = HomeViewModel();
+
+  @override
+  void initState() {
+    homeViewModel.fetchMoviesListApi();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final userPreference = Provider.of<UserViewModel>(context);
@@ -35,9 +45,44 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: SafeArea(
-        child: Column(
-          children: [],
+      body: ChangeNotifierProvider<HomeViewModel>(
+        create: (BuildContext context) => homeViewModel,
+        child: Consumer<HomeViewModel>(
+          builder: (context, value, _) {
+            switch (value.moviesList.status) {
+              case Status.LOADING:
+                return const Center(child: CircularProgressIndicator());
+              case Status.ERROR:
+                return Text(value.moviesList.message.toString());
+              case Status.COMPLETED:
+                return ListView.builder(
+                    itemCount: value.moviesList.data!.movies!.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: ListTile(
+                          leading: SizedBox(
+                            width: 50,
+                            child: Image.network(value
+                                .moviesList.data!.movies![index].posterurl 
+                                .toString(), errorBuilder: (context, error, stackTrace){
+                              return Container(
+                                color: Colors.amber,
+                              );
+                            },),
+                          ),
+                          title: Text(value
+                              .moviesList.data!.movies![index].title
+                              .toString()),
+                          subtitle: Text(value
+                              .moviesList.data!.movies![index].year
+                              .toString()),
+                        ),
+                      );
+                    });
+              default:
+                return const Text('');
+            }
+          },
         ),
       ),
     );
