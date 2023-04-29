@@ -9,7 +9,7 @@ class SplashServices {
     await Future.delayed(const Duration(seconds: 3));
     Future<UserModel> getUserData() => UserViewModel().getUser();
     getUserData().then((value) {
-      if (value.token == null || value.token == '') {
+      if (value.token == 'null' || value.token == '') {
         Navigator.pushNamed(context, RoutesName.login);
       } else {
         Navigator.pushNamed(context, RoutesName.home);
