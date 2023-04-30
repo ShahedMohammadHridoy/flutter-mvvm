@@ -33,7 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
           InkWell(
               onTap: () {
                 userPreference.removeUser().then((value) {
-                  Navigator.pushNamed(context, RoutesName.login);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, RoutesName.login, (route) => false);
                 }).onError((error, stackTrace) {
                   if (kDebugMode) {
                     print(error.toString());
