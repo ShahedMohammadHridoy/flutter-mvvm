@@ -10,9 +10,11 @@ class SplashServices {
     Future<UserModel> getUserData() => UserViewModel().getUser();
     getUserData().then((value) {
       if (value.token == 'null' || value.token == '') {
-        Navigator.pushNamed(context, RoutesName.login);
+        Navigator.pushNamedAndRemoveUntil(
+            context, RoutesName.login, (route) => false);
       } else {
-        Navigator.pushNamed(context, RoutesName.home);
+        Navigator.pushNamedAndRemoveUntil(
+            context, RoutesName.home, (route) => false);
       }
     }).onError((error, stackTrace) {
       if (kDebugMode) {

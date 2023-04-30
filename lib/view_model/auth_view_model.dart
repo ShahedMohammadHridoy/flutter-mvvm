@@ -6,7 +6,6 @@ import 'package:mvvm/utils/routes/routes_name.dart';
 import 'package:mvvm/utils/utils.dart';
 import 'package:mvvm/view_model/user_view_model.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthViewModel with ChangeNotifier {
   final _myRepo = AuthRepository();
@@ -28,7 +27,8 @@ class AuthViewModel with ChangeNotifier {
 
       setLoading(false);
       Utils.toastMessage("Login Successfully");
-      Navigator.pushNamed(context, RoutesName.home);
+      Navigator.pushNamedAndRemoveUntil(
+          context, RoutesName.home, (route) => false);
     }).onError((error, stackTrace) {
       setLoading(false);
       Utils.flushBarErrorMessage(error.toString(), context);
