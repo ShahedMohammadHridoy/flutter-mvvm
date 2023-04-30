@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
               case Status.LOADING:
                 return const Center(child: CircularProgressIndicator());
               case Status.ERROR:
-                return Text(value.moviesList.message.toString());
+                return Center(child: Text(value.moviesList.message.toString()));
               case Status.COMPLETED:
                 return ListView.builder(
                     itemCount: value.moviesList.data!.movies!.length,
@@ -62,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Card(
                         child: ListTile(
                           leading: SizedBox(
+                            height: 50,
                             width: 50,
                             child: Image.network(
                               value.moviesList.data!.movies![index].posterurl
@@ -71,6 +72,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     child:
                                         Icon(Icons.error, color: Colors.red));
                               },
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.cover,
                             ),
                           ),
                           title: Text(value
